@@ -1,7 +1,7 @@
 # Projek Capstone Kelompok 3 - 2SIC
 
 ## Tentang
-Capstone projek gabungan 3 mata kuliah prodi Sistem Informasi [Politeknik Caltex Riau](https://pcr.ac.id), yakni:
+Capstone projek 3 mata kuliah prodi Sistem Informasi [Politeknik Caltex Riau](https://pcr.ac.id), yakni:
 * Manajemen Rantai Pasok
 * Pemrograman Framework
 * Visualisasi Data
