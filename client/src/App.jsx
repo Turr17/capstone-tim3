@@ -12,8 +12,15 @@ const App = () => {
   const handleLogin = () => setIsLogin(true);
 
   // activeUser state
-  const [activeUser, setActiveUser] = useState();
+  const [activeUser, setActiveUser] = useState('');
   const handleUser = (activeUser) => setActiveUser(activeUser);
+
+  // notif bar state
+  const [isNotifActive, setIsNotifActive] = useState(false);
+  const handleNotif = () => {
+    setIsNotifActive(!isNotifActive);
+    console.log({ isNotifActive });
+  }
 
   return (
     <Router>
@@ -37,10 +44,10 @@ const App = () => {
           </Routes>
         </div>
       ) : (
-        <div className="w-full h-screen flex gap-4">
+        <div className="w-full h-screen flex gap-4 relative">
           <SideBar activeUser={activeUser} />
           <main className="flex-auto h-screen overflow-y-scroll">
-            <Profile />
+            <Profile notif={handleNotif} />
             {activeUser === "admin" ? (
               <Routes>
                 <Route path="/" element={<DashboardAdmin />} />
@@ -59,6 +66,7 @@ const App = () => {
               </Routes>
             )}
           </main>
+          <div className={`fixed top-0 ${isNotifActive? 'right-0' : '-right-full'} w-60 h-full bg-gray-100 shadow-lg shadow-gray-500 transition-all duration-300`}></div>
         </div>
       )}
     </Router>
