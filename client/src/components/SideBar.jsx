@@ -1,11 +1,12 @@
-import { NavLink, Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { logo } from "../assets/img";
-import { Square, Board, Box, Logout } from "./Svg";
+import { Square, Board, Box, Store, Logout } from "./Svg";
 
-const SideBar = ({ activeUser }) => {
+const SideBar = ({ activeUser, handleLogin }) => {
   const admin = [
     ["Dashboard", "/"],
     ["Pesanan", "/pesanan"],
+    ["Produksi", "/produksi"],
     ["Bahan Baku", "/bahan"],
   ];
   const anotherUser = [
@@ -28,20 +29,25 @@ const SideBar = ({ activeUser }) => {
                 : "px-3 pt-2 pb-1.5 rounded bg-none hover:bg-primary/30"
             }
           >
-            <li key={i} className="flex items-center gap-3 stroke-gray-700">
+            <li
+              key={i}
+              className="flex items-center gap-3 text-gray-700 stroke-gray-700"
+            >
               {(() => {
                 switch (page) {
                   case "Dashboard":
                     return <Square />;
                   case "Pesanan":
                     return <Board />;
+                  case "Produksi":
+                    return activeUser === "admin" ? <Store /> : null;
                   case "Bahan Baku":
                     return activeUser === "admin" ? <Box /> : null;
                   default:
                     return null;
                 }
               })()}
-              <span className="font-medium text-gray-700">
+              <span className="font-medium">
                 {activeUser === "admin"
                   ? page
                   : page !== "Bahan Baku"
@@ -52,11 +58,12 @@ const SideBar = ({ activeUser }) => {
           </NavLink>
         ))}
       </ul>
-      <Link to="/login" className="mt-auto">
-        <div className="flex items-center gap-3 px-3 py-2 font-medium text-status-red stroke-status-red rounded hover:bg-primary/30">
-          <Logout /> Keluar
-        </div>
-      </Link>
+      <div
+        onClick={() => handleLogin('/login')}
+        className="flex items-center gap-3 px-3 py-2 mt-auto font-medium text-status-red stroke-status-red rounded hover:bg-primary/30 cursor-pointer"
+      >
+        <Logout /> Keluar
+      </div>
     </aside>
   );
 };

@@ -2,3 +2,57 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  *::selection {
+    @apply bg-primary/70 text-white
+  }
+  h2 {
+    @apply text-xl font-bold text-gray-700
+  }
+  h3 {
+    @apply font-medium text-gray-700;
+  }
+  p {
+    @apply text-gray-500;
+  }
+  table {
+    @apply table-auto w-full
+  }
+  table
+  thead
+  th {
+    @apply pb-4 font-medium text-gray-700 text-left
+  }
+  table
+  tbody
+  td {
+    @apply text-gray-500
+  }
+  table
+  tbody
+  tr {
+    @apply text-gray-500
+  }
+
+  label {
+    @apply font-medium text-gray-800
+  }
+  input.form-input {
+    @apply w-full px-3 py-1.5 rounded-lg border border-primary/70 focus:outline-none focus:ring-1 focus:ring-primary
+  }
+  input.form-checkbox {
+    @apply w-5 h-5
+  }
+}
+
+@layer components {
+  .btn {
+    @apply px-4 py-2 text-lg rounded-lg font-semibold select-none uppercase tracking-wide
+  }
+  .btn-primary {
+    @apply bg-primary text-white active:ring-1 active:ring-primary active:ring-offset-2
+  }
+  .btn-secondary {
+    @apply bg-white text-primary border border-primary active:ring-1 active:ring-white active:ring-offset-2
+  }
+}

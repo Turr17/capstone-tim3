@@ -1,18 +1,28 @@
 import { useState } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
 import { Login, Register, Home } from "./pages";
-import { DashboardAdmin, PesananAdmin, BahanBaku } from "./pages/admin";
+import {
+  DashboardAdmin,
+  PesananAdmin,
+  BahanBaku,
+  Produksi,
+} from "./pages/admin";
 import { DashboardSupplier, PesananSupplier } from "./pages/supplier";
 import { DashboardCustomer, PesananCustomer } from "./pages/customer";
-import { SideBar, Navbar, Profile } from "./components";
+import { SideBar, Profile, Notifikasi } from "./components";
 
 const App = () => {
+  const navigate = useNavigate();
+  
   // login state
-  const [isLogin, setIsLogin] = useState(true);
-  const handleLogin = () => setIsLogin(true);
+  const [isLogin, setIsLogin] = useState(false);
+  const handleLogin = (path) => {
+    setIsLogin(!isLogin);
+    navigate(path)
+  }
 
   // activeUser state
-  const [activeUser, setActiveUser] = useState('');
+  const [activeUser, setActiveUser] = useState("supplier");
   const handleUser = (activeUser) => setActiveUser(activeUser);
 
   // notif bar state
@@ -20,13 +30,12 @@ const App = () => {
   const handleNotif = () => {
     setIsNotifActive(!isNotifActive);
     console.log({ isNotifActive });
-  }
+  };
 
   return (
     <Router>
       {!isLogin ? (
         <div className="w-full min-h-screen">
-          <Navbar />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route
@@ -35,24 +44,20 @@ const App = () => {
                 <Login handleLogin={handleLogin} handleUser={handleUser} />
               }
             />
-            <Route
-              path="/register"
-              element={
-                <Register handleLogin={handleLogin} handleUser={handleUser} />
-              }
-            />
+            <Route path="/register" element={<Register />} />
           </Routes>
         </div>
       ) : (
         <div className="w-full h-screen flex gap-4 relative">
-          <SideBar activeUser={activeUser} />
-          <main className="flex-auto h-screen overflow-y-scroll">
+          <SideBar activeUser={activeUser} handleLogin={handleLogin} />
+          <main className="flex-auto flex flex-col gap-6 px-8 h-screen overflow-y-scroll">
             <Profile notif={handleNotif} />
             {activeUser === "admin" ? (
               <Routes>
                 <Route path="/" element={<DashboardAdmin />} />
                 <Route path="/pesanan" element={<PesananAdmin />} />
                 <Route path="/bahan" element={<BahanBaku />} />
+                <Route path="/produksi" element={<Produksi />} />
               </Routes>
             ) : activeUser === "supplier" ? (
               <Routes>
@@ -66,11 +71,11 @@ const App = () => {
               </Routes>
             )}
           </main>
-          <div className={`fixed top-0 ${isNotifActive? 'right-0' : '-right-full'} w-60 h-full bg-gray-100 shadow-lg shadow-gray-500 transition-all duration-300`}></div>
+          <Notifikasi state={isNotifActive} handle={handleNotif} />
         </div>
       )}
     </Router>
   );
-}
+};
 
 export default App;
