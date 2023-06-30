@@ -7,7 +7,8 @@ const PesananCustomer = () => {
   const [chicken, setChicken] = useState(0);
   const [beef, setBeef] = useState(0);
   const priceChicken = 38000 * chicken
-  const priceBeef = 42000 * chicken
+  const priceBeef = 42000 * beef
+  const totalPrice = priceChicken + priceBeef;
 
   useEffect(() => {
     console.log({ chicken, beef });
@@ -16,15 +17,12 @@ const PesananCustomer = () => {
   // submit pesanan
   const handleSubmit = (e) => {
     e.preventDefault();
-    const totalChicken = chicken * 38000;
-    const totalBeef = beef * 42000;
-    const total = totalChicken + totalBeef;
     const pesanan = {
       chicken,
       beef,
-      totalChicken,
-      totalBeef,
-      total,
+      priceChicken,
+      priceBeef,
+      totalPrice,
     };
     console.log({ pesanan });
   };
@@ -32,6 +30,7 @@ const PesananCustomer = () => {
   return (
     <div>
       <h1>Menu Lotus Crunchy</h1>
+      <p>Berbagai pilihan menu Lotus Crunchy</p>
       <div className="mt-2 w-[800px] h-px bg-gray-800" />
       <div className="flex items-start">
         <ul className="flex-auto space-y-6 mt-10">
@@ -101,7 +100,7 @@ const PesananCustomer = () => {
           </li>
         </ul>
         <div className="flex-none flex flex-col gap-5 min-w-[300px]">
-          <h2 className="mb-10">Ringkasan Pesanan</h2>
+          <h2 className="mb-8">Ringkasan Pesanan</h2>
           <div>
             <h3>Lotus Chicken Original</h3>
             <div className="flex justify-between">
@@ -115,6 +114,10 @@ const PesananCustomer = () => {
               <p>{formatRupiah(priceBeef)}</p>
               <p>x{beef}</p>
             </div>
+          </div>
+          <div className="pt-2 border-t border-gray-700">
+            <h3>Total Harga</h3>
+            <p>{formatRupiah(totalPrice)}</p>
           </div>
           <form onSubmit={handleSubmit}>
             <button type="submit" className="btn btn-primary text-base w-full px-16">
