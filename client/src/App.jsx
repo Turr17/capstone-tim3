@@ -19,7 +19,7 @@ const App = () => {
   }
 
   // activeUser state
-  const [activeUser, setActiveUser] = useState("admin");
+  const [activeUser, setActiveUser] = useState("customer");
   const handleUser = (activeUser) => setActiveUser(activeUser);
 
   // notif bar state
@@ -47,7 +47,7 @@ const App = () => {
       ) : (
         <div className="w-full h-screen flex gap-4 relative">
           <SideBar activeUser={activeUser} handleLogin={handleLogin} />
-          <main className="flex-auto flex flex-col gap-6 px-8 h-screen overflow-y-scroll">
+          <main className="flex-auto flex flex-col gap-6 px-8 pb-5 h-screen overflow-y-scroll">
             <Profile notif={handleNotif} />
             {activeUser === "admin" ? (
               <Routes>

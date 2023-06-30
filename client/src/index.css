@@ -58,4 +58,7 @@
   .btn-secondary {
     @apply bg-white text-primary border border-primary active:bg-primary active:text-white
   }
+  .score-card {
+    @apply w-full p-5 rounded-lg bg-[url('./assets/img/score-card.svg')] bg-no-repeat bg-cover
+  }
 }

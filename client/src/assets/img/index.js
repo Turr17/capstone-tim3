@@ -4,6 +4,7 @@ import lotusBeef from './lotus-beef.png';
 import lotusChicken from './lotus-chicken.png';
 import pesawatKanan from './pesawat-kanan.png';
 import pesawatKiri from './pesawat-kiri.png';
+import cardBg from './score-card.svg';
 
 export {
   logo,
@@ -11,5 +12,6 @@ export {
   lotusBeef,
   lotusChicken,
   pesawatKanan,
-  pesawatKiri
+  pesawatKiri,
+  cardBg,
 }
