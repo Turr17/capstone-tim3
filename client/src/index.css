@@ -6,6 +6,9 @@
   *::selection {
     @apply bg-primary/70 text-white
   }
+  h1 {
+    @apply text-2xl font-bold text-gray-700
+  }
   h2 {
     @apply text-xl font-bold text-gray-700
   }
@@ -53,6 +56,6 @@
     @apply bg-primary text-white active:ring-1 active:ring-primary active:ring-offset-2
   }
   .btn-secondary {
-    @apply bg-white text-primary border border-primary active:ring-1 active:ring-white active:ring-offset-2
+    @apply bg-white text-primary border border-primary active:bg-primary active:text-white
   }
 }

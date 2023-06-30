@@ -1,5 +1,6 @@
-import React from 'react'
-import { formatRupiah } from '../../components/format';
+import React from "react";
+import { formatRupiah } from "../../components/format";
+import { StatusBar } from '../../components'
 
 const TableBahanBaku = ({ dataTable }) => {
   return (
@@ -19,9 +20,15 @@ const TableBahanBaku = ({ dataTable }) => {
           dataTable.map((item, i) => (
             <tr key={i}>
               <td>{item.bahan ? item.bahan : "-"}</td>
-              <td>{item.status ? item.status : "-"}</td>
               <td>{item.jumlah ? item.jumlah : 0}</td>
               <td>{item.minimum ? item.minimum : "-"}</td>
+              <td>
+                {item.status
+                  ? item.status <= item.minimum
+                    ? <StatusBar status='danger' title='Minimum' />
+                    : <StatusBar status='done' title='Tercukupi' />
+                  : "-"}
+              </td>
               <td>{item.harga ? formatRupiah(item.harga) : 0}</td>
               <td>halo</td>
             </tr>
@@ -44,6 +51,6 @@ const BahanBaku = () => {
       <TableBahanBaku />
     </div>
   );
-}
+};
 
-export default BahanBaku
+export default BahanBaku;

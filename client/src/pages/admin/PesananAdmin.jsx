@@ -1,5 +1,6 @@
 import React from "react";
 import { formatRupiah } from "../../components/format";
+import { StatusBar } from "../../components";
 
 const TablePesanan = ({ dataTable }) => {
   return (
@@ -19,7 +20,17 @@ const TablePesanan = ({ dataTable }) => {
           dataTable.map((item, i) => (
             <tr key={i}>
               <td>{item.kode ? item.kode : "-"}</td>
-              <td>{item.status ? item.status : "-"}</td>
+              <td>
+                {item.status ? (
+                  item.status === "Selesai" ? (
+                    <StatusBar status='done' title="Pesanan Selesai" />
+                  ) : (
+                    <StatusBar status='danger' title="Pesanan Baru" />
+                  )
+                ) : (
+                  "-"
+                )}
+              </td>
               <td>{item.pesanan ? item.pesanan : "-"}</td>
               <td>{item.total ? formatRupiah(item.total) : "-"}</td>
               <td>{item.metodeBayar ? item.metodeBayar : "-"}</td>

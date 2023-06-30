@@ -13,13 +13,13 @@ import { SideBar, Profile, Notifikasi } from "./components";
 
 const App = () => {
   // login state
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(true);
   const handleLogin = () => {
     setIsLogin(!isLogin);
   }
 
   // activeUser state
-  const [activeUser, setActiveUser] = useState("supplier");
+  const [activeUser, setActiveUser] = useState("admin");
   const handleUser = (activeUser) => setActiveUser(activeUser);
 
   // notif bar state

@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import { logo } from "../assets/img";
+import { logoKecil } from "../assets/img";
 import { Square, Board, Box, Store, Logout } from "./Svg";
 
 const SideBar = ({ activeUser, handleLogin }) => {
@@ -25,7 +25,7 @@ const SideBar = ({ activeUser, handleLogin }) => {
 
   return (
     <aside className="flex-none flex flex-col items-center p-10 min-w-[200px] bg-gray-100">
-      <img src={logo} alt="logo" className="w-24 object-contain" />
+      <img src={logoKecil} alt="logo" className="w-24 object-contain" />
       <ul className="flex flex-col gap-y-2 mt-20">
         {menu.map(([page, path], i) => (
           <NavLink
