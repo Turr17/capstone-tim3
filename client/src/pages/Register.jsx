@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { logo } from "../assets/img";
 
 const Login = () => {
@@ -9,7 +9,8 @@ const Login = () => {
   const [term, setTerm] = useState(false);
 
   // handle submit
-  const handleLogin = (e) => {
+  const navigate = useNavigate()
+  const handleSubmit = (e) => {
     e.preventDefault();
     const data = {
       email,
@@ -17,6 +18,7 @@ const Login = () => {
       term,
     };
     console.log({ data });
+    navigate('/login')
   };
 
   return (
@@ -33,8 +35,8 @@ const Login = () => {
         </div>
       </header>
       <main className="h-[calc(100vh-64px)] grid grid-cols-2">
-        <div className="grid place-items-center">
-          <div className="w-2/3 text-center">
+        <div className="col-span-1 flex justify-end items-center">
+          <div className="w-2/3 text-center mr-20">
             <img
               src={logo}
               alt="logo"
@@ -47,10 +49,10 @@ const Login = () => {
             </p>
           </div>
         </div>
-        <div className="grid place-items-center">
-          <div className="w-2/3 min-h-[50%]">
+        <div className="col-span-1 flex justify-start items-center">
+          <div className="w-2/3 min-h-[50%] ml-20">
             <h2 className="text-2xl">Daftar</h2>
-            <form onSubmit={handleLogin} className="flex flex-col gap-4 mt-5">
+            <form onSubmit={handleSubmit} className="flex flex-col gap-4 mt-5">
               <div className="px-5 py-8 space-y-4 bg-primary rounded-lg">
                 <div className="flex flex-col">
                   <label htmlFor="email">Email</label>
@@ -85,7 +87,7 @@ const Login = () => {
                     className="form-checkbox mt-px"
                     required
                   />
-                  <p className="text-sm text-gray-800">Dengan mendaftar, anda setuju dengan syarat, ketentuan dan kebijakan privasi dari Lotus Crunchy</p>
+                  <p className="text-xs text-gray-800 font-medium">Dengan mendaftar, anda menyetujui syarat, ketentuan dan kebijakan privasi dari Lotus Crunchy</p>
                 </div>
               </div>
               <button type="submit" className="btn btn-primary">

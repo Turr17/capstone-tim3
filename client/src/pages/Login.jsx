@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { logo } from "../assets/img";
 
 const Login = ({ handleLogin }) => {
@@ -8,6 +8,7 @@ const Login = ({ handleLogin }) => {
   const [password, setPassword] = useState("");
 
   // handle submit
+  const navigate = useNavigate()
   const handleSubmit = (e) => {
     e.preventDefault();
     const data = {
@@ -15,7 +16,8 @@ const Login = ({ handleLogin }) => {
       password,
     };
     console.log({ data });
-    handleLogin('/')
+    handleLogin()
+    navigate('/')
   };
 
   return (
@@ -32,8 +34,8 @@ const Login = ({ handleLogin }) => {
         </div>
       </header>
       <main className="h-[calc(100vh-64px)] grid grid-cols-2">
-        <div className="grid place-items-center">
-          <div className="w-2/3 text-center">
+        <div className="col-span-1 flex justify-end items-center">
+          <div className="w-2/3 text-center mr-20">
             <img
               src={logo}
               alt="logo"
@@ -46,8 +48,8 @@ const Login = ({ handleLogin }) => {
             </p>
           </div>
         </div>
-        <div className="grid place-items-center">
-          <div className="w-2/3 min-h-[50%]">
+        <div className="col-span-1 flex justify-start items-center">
+          <div className="w-2/3 min-h-[50%] ml-20">
             <h2 className="text-2xl">Masuk</h2>
             <form onSubmit={handleSubmit} className="flex flex-col gap-4 mt-5">
               <div className="px-5 py-8 space-y-4 bg-primary rounded-lg">

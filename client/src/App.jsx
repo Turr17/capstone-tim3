@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Login, Register, Home } from "./pages";
 import {
   DashboardAdmin,
@@ -12,13 +12,10 @@ import { DashboardCustomer, PesananCustomer } from "./pages/customer";
 import { SideBar, Profile, Notifikasi } from "./components";
 
 const App = () => {
-  const navigate = useNavigate();
-  
   // login state
   const [isLogin, setIsLogin] = useState(false);
-  const handleLogin = (path) => {
+  const handleLogin = () => {
     setIsLogin(!isLogin);
-    navigate(path)
   }
 
   // activeUser state

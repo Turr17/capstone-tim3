@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { logo } from "../assets/img";
 import { Square, Board, Box, Store, Logout } from "./Svg";
 
@@ -15,6 +15,13 @@ const SideBar = ({ activeUser, handleLogin }) => {
   ];
 
   const menu = activeUser === "admin" ? admin : anotherUser;
+
+  // handel logout
+  const navigate = useNavigate()
+  const handleLogout = () => {
+    handleLogin();
+    navigate('/login')
+  }
 
   return (
     <aside className="flex-none flex flex-col items-center p-10 min-w-[200px] bg-gray-100">
@@ -59,7 +66,7 @@ const SideBar = ({ activeUser, handleLogin }) => {
         ))}
       </ul>
       <div
-        onClick={() => handleLogin('/login')}
+        onClick={handleLogout}
         className="flex items-center gap-3 px-3 py-2 mt-auto font-medium text-status-red stroke-status-red rounded hover:bg-primary/30 cursor-pointer"
       >
         <Logout /> Keluar
