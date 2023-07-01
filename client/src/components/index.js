@@ -3,7 +3,7 @@ import SideBar from './SideBar';
 import Profile from './Profile';
 import Notifikasi from './Notifikasi';
 import StatusBar from './Status';
-import ScoreCard from './ScoreCard';
+import { ScoreCard, MenuCard, UlasanCard } from './Card';
 
 export {
   Navbar,
@@ -12,4 +12,6 @@ export {
   Notifikasi,
   StatusBar,
   ScoreCard,
+  MenuCard,
+  UlasanCard,
 }

@@ -25,7 +25,7 @@ const Login = ({ handleLogin }) => {
       <header className="flex justify-between items-center px-8 py-4 bg-primary">
         <h2 className="text-black font-bold tracking-wide">Lotus Crunchy</h2>
         <div className="flex gap-7 items-center font-semibold">
-          <Link to="/">Home</Link>
+          <Link to="/" className="text-white">Home</Link>
           <Link to="/register">
             <div className="px-4 py-1 rounded-full bg-white text-primary tracking-wide">
               Daftar

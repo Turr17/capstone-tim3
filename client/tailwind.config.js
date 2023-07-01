@@ -10,8 +10,8 @@ module.exports = {
         status: {
           red: "#ff5c5f",
           yellow: "#ffba52",
-          green: "#5b8dee",
-          blue: "#61d260",
+          blue: "#5b8dee",
+          green: "#61d260",
         },
       },
     },

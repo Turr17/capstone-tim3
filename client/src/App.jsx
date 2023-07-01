@@ -27,6 +27,9 @@ const App = () => {
     console.log({ isNotifActive });
   };
 
+  // add scroll smooth
+  document.documentElement.setAttribute("class", "scroll-smooth");
+
   return (
     <Router>
       {!isLogin ? (
