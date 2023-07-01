@@ -20,7 +20,7 @@ const SideBar = ({ activeUser, handleLogin }) => {
   const navigate = useNavigate()
   const handleLogout = () => {
     handleLogin();
-    navigate('/login')
+    navigate('/')
   }
 
   return (
