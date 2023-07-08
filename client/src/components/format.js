@@ -8,3 +8,18 @@ export const formatRupiah = (number) => {
 export const formatCurrency = (number) => {
   return new Intl.NumberFormat(['ban','id']).format(number)
 }
+
+export const currentDatetime = () => {
+  const date = new Date();
+  const current =
+    date.getDate() +
+    "-" +
+    (date.getMonth() + 1) +
+    "-" +
+    date.getFullYear() +
+    " " +
+    date.getHours() +
+    ":" +
+    date.getMinutes();
+  return current;
+};

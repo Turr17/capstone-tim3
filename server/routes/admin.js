@@ -47,8 +47,9 @@ recordRoutes.route("/admin/:id").get(function (req, res) {
 recordRoutes.route("/admin/add").post(function (req, res) {
   let db_connect = dbo.getDb("capstone");
   let myObj = {
-    namaAdmin: req.body.namaAdmin,
     username: req.body.username,
+    email: req.body.email,
+    password: req.body.password,
   };
   db_connect
     .collection("admin")
@@ -71,8 +72,9 @@ recordRoutes.route("/admin/update/:id").put(function (req, res) {
   let myquery = { _id: new ObjectId(req.params.id) };
   let newValues = {
     $set: {
-      namaAdmin: req.body.namaAdmin,
       username: req.body.username,
+      email: req.body.email,
+      password: req.body.password,
     },
   };
   db_connect

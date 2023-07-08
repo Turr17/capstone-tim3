@@ -51,6 +51,8 @@ recordRoutes.route("/bahan/add").post(function (req, res) {
     jumlahBahan: req.body.jumlahBahan,
     hargaBahan: req.body.hargaBahan,
     supplier: req.body.supplier,
+    status: req.body.status,
+    minimum: req.body.minimum,
   };
   db_connect
     .collection("bahanbaku")
@@ -77,6 +79,8 @@ recordRoutes.route("/bahan/update/:id").put(function (req, res) {
       jumlahBahan: req.body.jumlahBahan,
       hargaBahan: req.body.hargaBahan,
       supplier: req.body.supplier,
+      status: req.body.status,
+      minimum: req.body.minimum,
     },
   };
   db_connect

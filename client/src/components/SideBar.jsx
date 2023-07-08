@@ -2,32 +2,35 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { logoKecil } from "../assets/img";
 import { Square, Board, Box, Store, Logout } from "./Svg";
 
-const SideBar = ({ activeUser, handleLogin }) => {
-  const admin = [
-    ["Dashboard", "/"],
-    ["Pesanan", "/pesanan"],
-    ["Produksi", "/produksi"],
-    ["Bahan Baku", "/bahan"],
-  ];
-  const anotherUser = [
-    ["Dashboard", "/"],
-    ["Pesanan", "/pesanan"],
-  ];
-
-  const menu = activeUser === "admin" ? admin : anotherUser;
+const SideBar = ({ activeUser, handleLogin, handleUser }) => {
+  const menu = {
+    admin: [
+      ["Dashboard", "/"],
+      ["Pesanan", "/pesanan"],
+      ["Produksi", "/produksi"],
+      ["Bahan Baku", "/bahan"],
+    ],
+    supplier: [
+      ["Dashboard", "/"],
+      ["Pesanan", "/pesanan"],
+    ],
+    customer: [["Dashboard", "/"]],
+  };
 
   // handel logout
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const handleLogout = () => {
+    handleUser("", "", "");
     handleLogin();
-    navigate('/')
-  }
+    navigate("/");
+    console.log("logout success");
+  };
 
   return (
     <aside className="flex-none flex flex-col items-center p-10 min-w-[200px] bg-gray-100">
       <img src={logoKecil} alt="logo" className="w-24 object-contain" />
       <ul className="flex flex-col gap-y-2 mt-20">
-        {menu.map(([page, path], i) => (
+        {menu[activeUser.role].map(([page, path], i) => (
           <NavLink
             to={path}
             className={({ isActive }) =>
@@ -47,15 +50,15 @@ const SideBar = ({ activeUser, handleLogin }) => {
                   case "Pesanan":
                     return <Board />;
                   case "Produksi":
-                    return activeUser === "admin" ? <Store /> : null;
+                    return <Store />;
                   case "Bahan Baku":
-                    return activeUser === "admin" ? <Box /> : null;
+                    return <Box />;
                   default:
                     return null;
                 }
               })()}
               <span className="font-medium">
-                {activeUser === "admin"
+                {activeUser.role === "admin"
                   ? page
                   : page !== "Bahan Baku"
                   ? page

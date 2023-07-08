@@ -4,13 +4,13 @@
 
 @layer base {
   *::selection {
-    @apply bg-primary/70 text-white
+    @apply bg-primary/70 text-white;
   }
   h1 {
-    @apply text-2xl font-bold text-gray-700
+    @apply text-2xl font-bold text-gray-700;
   }
   h2 {
-    @apply text-xl font-bold text-gray-700
+    @apply text-xl font-bold text-gray-700;
   }
   h3 {
     @apply font-medium text-gray-700;
@@ -19,52 +19,46 @@
     @apply text-gray-500;
   }
   table {
-    @apply table-auto w-full
+    @apply table-auto w-full;
   }
-  table
-  thead
-  th {
-    @apply pb-4 font-medium text-gray-700 text-left
+  table thead th {
+    @apply pb-4 font-medium text-gray-700 text-left;
   }
-  table
-  tbody
-  td {
-    @apply text-gray-500
+  table tbody td {
+    @apply text-gray-500;
   }
-  table
-  tbody
-  tr {
-    @apply text-gray-500
+  table tbody tr {
+    @apply text-gray-500;
   }
 
   label {
-    @apply font-medium text-gray-800
+    @apply font-medium text-gray-800;
   }
-  input.form-input {
-    @apply w-full px-3 py-1.5 rounded-lg border border-primary/70 focus:outline-none focus:ring-1 focus:ring-primary
+  .form-input {
+    @apply w-full px-3 py-1.5 rounded-lg border border-primary/70 focus:outline-none focus:ring-1 focus:ring-primary;
   }
   input.form-checkbox {
-    @apply w-4 h-4
+    @apply w-4 h-4;
   }
   *::-webkit-scrollbar {
-    @apply w-2
+    @apply w-2;
   }
   *::-webkit-scrollbar-thumb {
-    @apply rounded bg-gray-300 hover:bg-primary/70
+    @apply rounded bg-gray-300 hover:bg-primary/70;
   }
 }
 
 @layer components {
   .btn {
-    @apply px-4 py-2 text-lg rounded-lg font-semibold select-none uppercase tracking-wide
+    @apply px-4 py-2 text-lg rounded-lg font-semibold select-none uppercase tracking-wide;
   }
   .btn-primary {
-    @apply bg-primary text-white active:ring-1 active:ring-primary active:ring-offset-2
+    @apply bg-primary text-white active:ring-1 active:ring-primary active:ring-offset-2;
   }
   .btn-secondary {
-    @apply bg-white text-gray-800 border border-primary active:bg-primary active:text-white
+    @apply bg-white text-gray-800 border border-primary active:bg-primary active:text-white;
   }
   .score-card {
-    @apply w-full p-5 rounded-lg bg-[url('./assets/img/score-card.svg')] bg-no-repeat bg-cover
+    @apply w-full p-5 rounded-lg bg-[url('./assets/img/score-card.svg')] bg-no-repeat bg-cover;
   }
 }

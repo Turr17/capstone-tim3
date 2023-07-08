@@ -2,7 +2,16 @@ import React from "react";
 import { formatRupiah } from "../../components/format";
 import { StatusBar } from "../../components";
 
-const TablePesanan = ({ dataTable }) => {
+const TablePesanan = () => {
+  const dataPesanan = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/pesanan");
+      return await response.json();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <table>
       <thead>
@@ -16,30 +25,22 @@ const TablePesanan = ({ dataTable }) => {
         </tr>
       </thead>
       <tbody>
-        {dataTable ? (
-          dataTable.map((item, i) => (
-            <tr key={i}>
-              <td>{item.kode ? item.kode : "-"}</td>
-              <td>
-                {item.status ? (
-                  item.status === "Selesai" ? (
-                    <StatusBar status='done' title="Pesanan Selesai" />
-                  ) : (
-                    <StatusBar status='danger' title="Pesanan Baru" />
-                  )
-                ) : (
-                  "-"
-                )}
-              </td>
-              <td>{item.pesanan ? item.pesanan : "-"}</td>
-              <td>{item.total ? formatRupiah(item.total) : "-"}</td>
-              <td>{item.metodeBayar ? item.metodeBayar : "-"}</td>
-              <td>halo</td>
-            </tr>
-          ))
-        ) : (
-          <tr>Pesanan Tidak Tersedia</tr>
-        )}
+        {dataPesanan?.data?.map((item, i) => (
+          <tr key={i}>
+            <td>{item._id ?? "-"}</td>
+            <td>
+              {item.status === "Selesai" ? (
+                <StatusBar status="done" title="Pesanan Selesai" />
+              ) : (
+                <StatusBar status="danger" title="Pesanan Baru" /> ?? "-"
+              )}
+            </td>
+            <td>{item.pesanan ?? "-"}</td>
+            <td>{formatRupiah(item.totalBelanja) ?? "-"}</td>
+            <td>{item.pembayaran ?? "-"}</td>
+            <td>??</td>
+          </tr>
+        )) ?? <tr>Pesanan Tidak Tersedia</tr>}
       </tbody>
     </table>
   );

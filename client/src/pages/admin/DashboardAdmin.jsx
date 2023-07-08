@@ -2,7 +2,16 @@ import React from "react";
 import { formatRupiah } from "../../components/format";
 import { ScoreCard } from "../../components";
 
-const TableRiwayat = ({ dataTable }) => {
+const TableRiwayat = () => {
+  const dataPesanan = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/pesanan");
+      return await response.json();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  
   return (
     <table className="w-full flex-auto">
       <thead>
@@ -14,18 +23,14 @@ const TableRiwayat = ({ dataTable }) => {
         </tr>
       </thead>
       <tbody>
-        {dataTable ? (
-          dataTable.map((item, i) => (
+        {dataPesanan?.data?.map((item, i) => (
             <tr key={i}>
-              <td>{item.kode ? item.kode : "-"}</td>
-              <td>{item.pesanan ? item.pesanan : "-"}</td>
-              <td>{item.total ? formatRupiah(item.total) : 0}</td>
-              <td>{item.pembayaran ? item.pembayaran : "-"}</td>
+              <td>{item._id ?? "-"}</td>
+              <td>{item.pesanan ?? "-"}</td>
+              <td>{formatRupiah(item.totalBelanja) ?? 0}</td>
+              <td>{item.pembayaran ?? "-"}</td>
             </tr>
-          ))
-        ) : (
-          <tr>Bahan Baku Tidak Tersedia</tr>
-        )}
+          ))?? <tr>Bahan Baku Tidak Tersedia</tr>}
       </tbody>
     </table>
   );

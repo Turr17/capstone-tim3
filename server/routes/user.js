@@ -6,10 +6,10 @@ const ObjectId = require("mongodb").ObjectId;
 recordRoutes.use(express.urlencoded({ extended: true }));
 
 // menampilkan data
-recordRoutes.route("/pesanan").get(function (req, res) {
+recordRoutes.route("/user").get(function (req, res) {
   let db_connect = dbo.getDb("capstone");
   db_connect
-    .collection("pesanan")
+    .collection("user")
     .find({})
     .toArray(function (err, result) {
       if (err) throw err;
@@ -25,11 +25,11 @@ recordRoutes.route("/pesanan").get(function (req, res) {
 });
 
 // menampilkan data by id
-recordRoutes.route("/pesanan/:id").get(function (req, res) {
+recordRoutes.route("/user/:id").get(function (req, res) {
   let db_connect = dbo.getDb("capstone");
   let myquery = { _id: new ObjectId(req.params.id) };
   db_connect
-    .collection("pesanan")
+    .collection("user")
     .findOne(myquery, function (err, result) {
       if (err) throw err;
       res.json(result);
@@ -44,18 +44,16 @@ recordRoutes.route("/pesanan/:id").get(function (req, res) {
 });
 
 // menambahkan data
-recordRoutes.route("/pesanan/add").post(function (req, res) {
+recordRoutes.route("/user/add").post(function (req, res) {
   let db_connect = dbo.getDb("capstone");
   let myObj = {
-    pesanan: req.body.pesanan,
-    jumlahPesanan: req.body.jumlahPesanan,
-    tanggalPesanan: req.body.dateTime,
-    totalBelanja: req.body.totalBelanja,
-    pembayaran: req.body.pembayaran,
-    status: req.body.status,
+    username: req.body.username,
+    email: req.body.email,
+    password: req.body.password,
+    role: req.body.role,
   };
   db_connect
-    .collection("pesanan")
+    .collection("user")
     .insertOne(myObj, function (err, result) {
       if (err) throw err;
       res.json(result);
@@ -70,21 +68,19 @@ recordRoutes.route("/pesanan/add").post(function (req, res) {
 });
 
 // mengupdate data
-recordRoutes.route("/pesanan/update/:id").put(function (req, res) {
+recordRoutes.route("/user/update/:id").put(function (req, res) {
   let db_connect = dbo.getDb("capstone");
   let myquery = { _id: new ObjectId(req.params.id) };
   let newValues = {
     $set: {
-      pesanan: req.body.pesanan,
-      jumlahPesanan: req.body.jumlahPesanan,
-      tanggalPesanan: req.body.dateTime,
-      totalBelanja: req.body.totalBelanja,
-      pembayaran: req.body.pembayaran,
-      status: req.body.status,
+      username: req.body.username,
+      email: req.body.email,
+      password: req.body.password,
+      role: req.body.role,
     },
   };
   db_connect
-    .collection("pesanan")
+    .collection("user")
     .updateOne(myquery, newValues, function (err, result) {
       if (err) throw err;
       console.log("berhasil update order");
@@ -100,11 +96,11 @@ recordRoutes.route("/pesanan/update/:id").put(function (req, res) {
 });
 
 // menghapus data
-recordRoutes.route("/pesanan/delete/:id").delete(function (req, res) {
+recordRoutes.route("/user/delete/:id").delete(function (req, res) {
   let db_connect = dbo.getDb("capstone");
   let myquery = { _id: new ObjectId(req.params.id) };
   db_connect
-    .collection("pesanan")
+    .collection("user")
     .deleteOne(myquery, function (err, result) {
       if (err) throw err;
       console.log("order berhasil dihapus");

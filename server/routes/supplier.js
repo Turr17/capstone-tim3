@@ -47,8 +47,9 @@ recordRoutes.route("/supplier/:id").get(function (req, res) {
 recordRoutes.route("/supplier/add").post(function (req, res) {
   let db_connect = dbo.getDb("capstone");
   let myObj = {
-    namaSupplier: req.body.namaSupplier,
     username: req.body.username,
+    email: req.body.email,
+    password: req.body.password,
   };
   db_connect
     .collection("supplier")
@@ -71,8 +72,9 @@ recordRoutes.route("/supplier/update/:id").put(function (req, res) {
   let myquery = { _id: new ObjectId(req.params.id) };
   let newValues = {
     $set: {
-      namaSupplier: req.body.namaSupplier,
       username: req.body.username,
+      email: req.body.email,
+      password: req.body.password,
     },
   };
   db_connect

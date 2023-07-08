@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { lotusChicken, lotusBeef } from "../../assets/img";
-import { formatRupiah } from "../../components/format";
+import { currentDatetime, formatRupiah } from "../../components/format";
+import axios from "axios";
 
 const PesananCustomer = () => {
   // pesanan state
   const [chicken, setChicken] = useState(0);
   const [beef, setBeef] = useState(0);
-  const priceChicken = 38000 * chicken
-  const priceBeef = 42000 * beef
+  const priceChicken = 38000 * chicken;
+  const priceBeef = 42000 * beef;
   const totalPrice = priceChicken + priceBeef;
 
   useEffect(() => {
@@ -17,14 +18,25 @@ const PesananCustomer = () => {
   // submit pesanan
   const handleSubmit = (e) => {
     e.preventDefault();
+
     const pesanan = {
-      chicken,
-      beef,
-      priceChicken,
-      priceBeef,
-      totalPrice,
+      tanggalPesanan: currentDatetime(),
+      pesanan: [
+        ["Lotus Chicken Original", chicken],
+        ["Lotus Beef Original", beef],
+      ],
+      totalBelanja: totalPrice,
+      pembayaran: e.target.pembayaran.value,
+      status: "Pesanan Baru",
     };
-    console.log({ pesanan });
+
+    axios
+      .post("http://localhost:5000/pesanan/add", pesanan)
+      .then((res) => {
+        console.log({ pesanan });
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -99,28 +111,50 @@ const PesananCustomer = () => {
             </div>
           </li>
         </ul>
-        <div className="flex-none flex flex-col gap-5 min-w-[300px]">
+        <div className="flex-none w-96 flex flex-col gap-5 min-w-[300px] bg-primary p-5 rounded-lg">
           <h2 className="mb-8">Ringkasan Pesanan</h2>
           <div>
             <h3>Lotus Chicken Original</h3>
             <div className="flex justify-between">
-              <p>{formatRupiah(priceChicken)}</p>
-              <p>x{chicken}</p>
+              <p className="text-white font-medium">{formatRupiah(priceChicken)}</p>
+              <p className="text-white font-medium">x{chicken}</p>
             </div>
           </div>
           <div>
             <h3>Lotus Beef Original</h3>
             <div className="flex justify-between">
-              <p>{formatRupiah(priceBeef)}</p>
-              <p>x{beef}</p>
+              <p className="text-white font-medium">{formatRupiah(priceBeef)}</p>
+              <p className="text-white font-medium">x{beef}</p>
             </div>
           </div>
-          <div className="pt-2 border-t border-gray-700">
-            <h3>Total Harga</h3>
-            <p>{formatRupiah(totalPrice)}</p>
-          </div>
-          <form onSubmit={handleSubmit}>
-            <button type="submit" className="btn btn-primary text-base w-full px-16">
+          <form
+            onSubmit={handleSubmit}
+            className="space-y-4 border-t border-gray-700"
+          >
+            <div className="pt-3 flex justify-between items-start">
+              <div className="">
+                <h3>Total Pembayaran</h3>
+                <p className="text-white font-medium">{formatRupiah(totalPrice)}</p>
+              </div>
+              <div className="">
+                <label htmlFor="pembayaran">
+                  <h3>Metode Pembayaran</h3>
+                </label>
+                <select
+                  name="pembayaran"
+                  id="pembayaran"
+                  className="form-input"
+                >
+                  <option value="cash">Cash</option>
+                  <option value="debit">Debit</option>
+                  <option value="ovo">OVO</option>
+                </select>
+              </div>
+            </div>
+            <button
+              type="submit"
+              className="btn btn-secondary text-base w-full px-16"
+            >
               Buat Pesanan
             </button>
           </form>

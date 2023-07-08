@@ -1,24 +1,29 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { logo } from "../assets/img";
+import axios from "axios";
 
 const Login = () => {
-  // login state
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [term, setTerm] = useState(false);
-
   // handle submit
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
+
     const data = {
-      email,
-      password,
-      term,
+      username: e.target.username.value,
+      email: e.target.email.value,
+      password: e.target.password.value,
+      role: e.target.role.value,
     };
-    console.log({ data });
-    navigate('/login')
+
+    axios
+      .post("http://localhost:5000/user/add", data)
+      .then((res) => {
+        console.log({ data });
+        console.log(res);
+        setTimeout(() => navigate("/login"), 3000);
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -26,7 +31,9 @@ const Login = () => {
       <header className="flex justify-between items-center px-8 py-4 bg-primary">
         <h2 className="text-black font-bold tracking-wide">Lotus Crunchy</h2>
         <div className="flex gap-7 items-center font-semibold">
-          <Link to="/" className="text-white">Home</Link>
+          <Link to="/" className="text-white">
+            Home
+          </Link>
           <Link to="/login">
             <div className="px-4 py-1 rounded-full bg-white text-primary tracking-wide">
               Masuk
@@ -61,7 +68,6 @@ const Login = () => {
                     name="email"
                     id="email"
                     placeholder="Masukkan email"
-                    onChange={(e) => setEmail(e.target.value)}
                     className="form-input"
                     required
                   />
@@ -73,21 +79,30 @@ const Login = () => {
                     name="password"
                     id="password"
                     placeholder="Masukkan password"
-                    onChange={(e) => setPassword(e.target.value)}
                     className="form-input"
                     required
                   />
+                </div>
+                <div className="flex flex-col">
+                  <label htmlFor="role">Pilih Role</label>
+                  <select name="role" id="role" className="form-input" required>
+                    <option value="customer">Customer</option>
+                    <option value="admin">Admin</option>
+                    <option value="supplier">Supplier</option>
+                  </select>
                 </div>
                 <div className="flex items-start gap-2">
                   <input
                     type="checkbox"
                     name="checkbox"
                     id="checkbox"
-                    onChange={() => setTerm(true)}
                     className="form-checkbox mt-px"
                     required
                   />
-                  <p className="text-xs text-gray-800 font-medium">Dengan mendaftar, anda menyetujui syarat, ketentuan dan kebijakan privasi dari Lotus Crunchy</p>
+                  <p className="text-xs text-gray-800 font-medium">
+                    Dengan mendaftar, anda menyetujui syarat, ketentuan dan
+                    kebijakan privasi dari Lotus Crunchy
+                  </p>
                 </div>
               </div>
               <button type="submit" className="btn btn-primary">

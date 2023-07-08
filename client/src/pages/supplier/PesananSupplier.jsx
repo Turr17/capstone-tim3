@@ -1,7 +1,16 @@
 import React from "react";
 import { formatRupiah } from "../../components/format";
 
-const TablePesanBahan = ({ dataTable }) => {
+const TablePesanBahan = () => {
+  const dataBahan = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/bahan");
+      return await response.json();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <table>
       <thead>
@@ -15,20 +24,20 @@ const TablePesanBahan = ({ dataTable }) => {
         </tr>
       </thead>
       <tbody>
-        {dataTable ? (
-          dataTable.map((item, i) => (
-            <tr key={i}>
-              <td>{item.bahan ? item.bahan : "-"}</td>
-              <td>{item.status ? item.status : "-"}</td>
-              <td>{item.pesananBahan ? item.pesananBahan : 0}</td>
-              <td>{item.hargaBahan ? formatRupiah(item.hargaBahan) : "-"}</td>
-              <td>{item.total ? formatRupiah(item.total) : 0}</td>
-              <td>halo</td>
-            </tr>
-          ))
-        ) : (
-          <tr>Pesanan Bahan Baku Tidak Tersedia</tr>
-        )}
+        {dataBahan?.data?.map((item, i) => (
+          <tr key={i}>
+            <td>{item.namaBahan ?? "-"}</td>
+            <td>{item.status ?? "-"}</td>
+            <td>{item.jumlahBahan ?? 0}</td>
+            <td>{formatRupiah(item.hargaBahan) ?? "-"}</td>
+            <td>
+              {formatRupiah(
+                parseInt(item.jumlahBahan) * parseInt(item.hargaBahan)
+              ) ?? 0}
+            </td>
+            <td>??</td>
+          </tr>
+        )) ?? <tr>Pesanan Bahan Baku Tidak Tersedia</tr>}
       </tbody>
     </table>
   );

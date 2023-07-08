@@ -1,7 +1,16 @@
 import React from "react";
 import { StatusBar } from "../../components";
 
-const TableProduk = ({ dataTable }) => {
+const TableProduk = () => {
+  const dataProduksi = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/makanan");
+      return await response.json();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <table>
       <thead>
@@ -15,26 +24,22 @@ const TableProduk = ({ dataTable }) => {
         </tr>
       </thead>
       <tbody>
-        {dataTable ? (
-          dataTable.map((item, i) => (
-            <tr key={i}>
-              <td>{item.produk ? item.produk : "-"}</td>
-              <td>{item.jumlahJadi ? item.jumlahJadi : "-"}</td>
-              <td>{item.jumlahFrozen ? item.jumlahFrozen : 0}</td>
-              <td>{item.minimum ? item.minimum : "-"}</td>
-              <td>
-                {item.status
-                  ? item.status <= item.minimum
-                    ? <StatusBar status='danger' title='Minimum' />
-                    : <StatusBar status='done' title='Tercukupi' />
-                  : "-"}
-              </td>
-              <td>halo</td>
-            </tr>
-          ))
-        ) : (
-          <tr>Produk Tidak Tersedia</tr>
-        )}
+        {dataProduksi?.data?.map((item, i) => (
+          <tr key={i}>
+            <td>{item.namaMakanan ?? "-"}</td>
+            <td>{item.jumlahMakanan ?? "-"}</td>
+            <td>{item.jumlahFrozen ?? 0}</td>
+            <td>{item.minimum ?? "-"}</td>
+            <td>
+              {item.status <= item.minimum ? (
+                <StatusBar status="danger" title="Minimum" />
+              ) : (
+                <StatusBar status="done" title="Tercukupi" /> ?? "-"
+              )}
+            </td>
+            <td>??</td>
+          </tr>
+        )) ?? <tr>Produk Tidak Tersedia</tr>}
       </tbody>
     </table>
   );

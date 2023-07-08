@@ -1,8 +1,17 @@
 import React from "react";
 import { formatRupiah } from "../../components/format";
-import { StatusBar } from '../../components'
+import { StatusBar } from "../../components";
 
-const TableBahanBaku = ({ dataTable }) => {
+const TableBahanBaku = () => {
+  const dataBahanBaku = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/bahan");
+      return await response.json();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <table>
       <thead>
@@ -16,26 +25,22 @@ const TableBahanBaku = ({ dataTable }) => {
         </tr>
       </thead>
       <tbody>
-        {dataTable ? (
-          dataTable.map((item, i) => (
-            <tr key={i}>
-              <td>{item.bahan ? item.bahan : "-"}</td>
-              <td>{item.jumlah ? item.jumlah : 0}</td>
-              <td>{item.minimum ? item.minimum : "-"}</td>
-              <td>
-                {item.status
-                  ? item.status <= item.minimum
-                    ? <StatusBar status='danger' title='Minimum' />
-                    : <StatusBar status='done' title='Tercukupi' />
-                  : "-"}
-              </td>
-              <td>{item.harga ? formatRupiah(item.harga) : 0}</td>
-              <td>halo</td>
-            </tr>
-          ))
-        ) : (
-          <tr>Bahan Baku Tidak Tersedia</tr>
-        )}
+        {dataBahanBaku?.data?.map((item, i) => (
+          <tr key={i}>
+            <td>{item.namaBahan ?? "-"}</td>
+            <td>
+              {(item.status <= item.minimum ? (
+                <StatusBar status="danger" title="Minimum" />
+              ) : (
+                <StatusBar status="done" title="Tercukupi" />
+              )) ?? "-"}
+            </td>
+            <td>{item.jumlahBahan ?? 0}</td>
+            <td>{item.minimum ?? "-"}</td>
+            <td>{formatRupiah(item.hargaBahan) ?? 0}</td>
+            <td>??</td>
+          </tr>
+        )) ?? <tr>Bahan Baku Tidak Tersedia</tr>}
       </tbody>
     </table>
   );

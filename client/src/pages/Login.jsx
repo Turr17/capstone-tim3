@@ -1,23 +1,45 @@
-import React, { useState } from "react";
+import * as React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { logo } from "../assets/img";
 
-const Login = ({ handleLogin }) => {
-  // login state
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+const Login = ({ handleLogin, handleUser }) => {
+  const navigate = useNavigate();
+  const [loading, setLoading] = React.useState(false);
+  const [error, setError] = React.useState(false);
 
-  // handle submit
-  const navigate = useNavigate()
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const dataUser = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/user");
+      return await response.json();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
     const data = {
-      email,
-      password,
+      email: event.target.email.value,
+      password: event.target.password.value,
     };
-    console.log({ data });
-    handleLogin()
-    navigate('/')
+
+    if (
+      dataUser?.data.some(
+        (item) => item.email === data.email && item.password === data.password
+      )
+    ) {
+      const user = dataUser?.data.find(
+        (item) => item.email === data.email && item.password === data.password
+      );
+      handleUser(user._id, user.name, user.role);
+      console.log("login success");
+      navigate("/");
+      handleLogin();
+    } else {
+      setError(true);
+    }
+    setLoading(false);
   };
 
   return (
@@ -25,7 +47,9 @@ const Login = ({ handleLogin }) => {
       <header className="flex justify-between items-center px-8 py-4 bg-primary">
         <h2 className="text-black font-bold tracking-wide">Lotus Crunchy</h2>
         <div className="flex gap-7 items-center font-semibold">
-          <Link to="/" className="text-white">Home</Link>
+          <Link to="/" className="text-white">
+            Home
+          </Link>
           <Link to="/register">
             <div className="px-4 py-1 rounded-full bg-white text-primary tracking-wide">
               Daftar
@@ -60,7 +84,6 @@ const Login = ({ handleLogin }) => {
                     name="email"
                     id="email"
                     placeholder="Masukkan email"
-                    onChange={(e) => setEmail(e.target.value)}
                     className="form-input"
                     required
                   />
@@ -72,7 +95,6 @@ const Login = ({ handleLogin }) => {
                     name="password"
                     id="password"
                     placeholder="Masukkan password"
-                    onChange={(e) => setPassword(e.target.value)}
                     className="form-input"
                     required
                   />

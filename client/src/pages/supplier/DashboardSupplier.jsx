@@ -2,7 +2,16 @@ import React from "react";
 import { formatRupiah } from "../../components/format";
 import { ScoreCard, StatusBar } from "../../components";
 
-const TableRiwayat = ({ dataTable }) => {
+const TableRiwayat = () => {
+  const dataBahan = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/bahan");
+      return await response.json();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <table className="w-full flex-auto">
       <thead>
@@ -15,29 +24,21 @@ const TableRiwayat = ({ dataTable }) => {
         </tr>
       </thead>
       <tbody>
-        {dataTable ? (
-          dataTable.map((item, i) => (
-            <tr key={i}>
-              <td>{item.bahan ? item.bahan : "-"}</td>
-              <td>
-                {item.status ? (
-                  item.status <= item.minimum ? (
-                    <StatusBar status="danger" title="Minimum" />
-                  ) : (
-                    <StatusBar status="done" title="Tercukupi" />
-                  )
-                ) : (
-                  "-"
-                )}
-              </td>
-              <td>{item.jumlah ? item.jumlah : 0}</td>
-              <td>{item.harga ? formatRupiah(item.harga) : 0}</td>
-              <td>{item.total ? formatRupiah(item.total) : 0}</td>
-            </tr>
-          ))
-        ) : (
-          <tr>Bahan Baku Tidak Tersedia</tr>
-        )}
+        {dataBahan?.data?.map((item, i) => (
+          <tr key={i}>
+            <td>{item.bahan ?? "-"}</td>
+            <td>
+              {(item.status <= item.minimum ? (
+                <StatusBar status="danger" title="Minimum" />
+              ) : (
+                <StatusBar status="done" title="Tercukupi" />
+              )) ?? "-"}
+            </td>
+            <td>{item.jumlah ?? 0}</td>
+            <td>{formatRupiah(item.harga) ?? 0}</td>
+            <td>{formatRupiah(item.total) ?? 0}</td>
+          </tr>
+        )) ?? <tr>Bahan Baku Tidak Tersedia</tr>}
       </tbody>
     </table>
   );

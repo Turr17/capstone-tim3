@@ -52,6 +52,8 @@ recordRoutes.route("/makanan/add").post(function (req, res) {
     jumlahMakanan: req.body.jumlahMakanan,
     jumlahFrozen: req.body.jumlahFrozen,
     tanggalProduksi: req.body.tanggalProduksi,
+    minimum: req.body.minimum,
+    status: req.body.status,
   };
   db_connect
     .collection("makanan")
@@ -79,6 +81,8 @@ recordRoutes.route("/makanan/update/:id").put(function (req, res) {
       jumlahMakanan: req.body.jumlahMakanan,
       jumlahFrozen: req.body.jumlahFrozen,
       tanggalProduksi: req.body.tanggalProduksi,
+      minimum: req.body.minimum,
+      status: req.body.status,
     },
   };
   db_connect

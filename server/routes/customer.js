@@ -48,6 +48,7 @@ recordRoutes.route("/customer/add").post(function (req, res) {
   let db_connect = dbo.getDb("capstone");
   let myObj = {
     username: req.body.name,
+    email: req.body.email,
     password: req.body.password,
   };
   db_connect
@@ -72,6 +73,7 @@ recordRoutes.route("/customer/update/:id").put(function (req, res) {
   let newValues = {
     $set: {
       username: req.body.name,
+      email: req.body.email,
       password: req.body.password,
     },
   };
