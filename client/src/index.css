@@ -25,7 +25,7 @@
     @apply pb-4 font-medium text-gray-700 text-left;
   }
   table tbody td {
-    @apply text-gray-500;
+    @apply text-gray-500 py-2
   }
   table tbody tr {
     @apply text-gray-500;

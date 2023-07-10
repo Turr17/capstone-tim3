@@ -1,16 +1,15 @@
 import React from "react";
 import { formatRupiah } from "../../components/format";
 import { ScoreCard, StatusBar } from "../../components";
+import { GetData } from "../../components/api";
 
 const TableRiwayat = () => {
-  const dataBahan = async () => {
-    try {
-      const response = await fetch("http://localhost:5000/bahan");
-      return await response.json();
-    } catch (error) {
-      console.log(error);
-    }
+  const Bahan = () => {
+    const { users } = GetData("http://localhost:5000/bahan");
+    console.log(users);
+    return users;
   };
+  const dataBahan = Bahan();
 
   return (
     <table className="w-full flex-auto">
@@ -26,17 +25,17 @@ const TableRiwayat = () => {
       <tbody>
         {dataBahan?.data?.map((item, i) => (
           <tr key={i}>
-            <td>{item.bahan ?? "-"}</td>
+            <td>{item.namaBahan ?? "-"}</td>
             <td>
               {(item.status <= item.minimum ? (
                 <StatusBar status="danger" title="Minimum" />
               ) : (
-                <StatusBar status="done" title="Tercukupi" />
+                <StatusBar status="success" title="Tercukupi" />
               )) ?? "-"}
             </td>
-            <td>{item.jumlah ?? 0}</td>
-            <td>{formatRupiah(item.harga) ?? 0}</td>
-            <td>{formatRupiah(item.total) ?? 0}</td>
+            <td>{item.jumlahBahan ?? 0}</td>
+            <td>{formatRupiah(item.hargaBahan) ?? 0}</td>
+            {/* <td>{formatRupiah(item.total) ?? 0}</td> */}
           </tr>
         )) ?? <tr>Bahan Baku Tidak Tersedia</tr>}
       </tbody>

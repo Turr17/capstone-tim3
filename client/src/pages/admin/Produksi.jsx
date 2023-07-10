@@ -1,15 +1,14 @@
 import React from "react";
 import { StatusBar } from "../../components";
+import { GetData } from "../../components/api";
 
 const TableProduk = () => {
-  const dataProduksi = async () => {
-    try {
-      const response = await fetch("http://localhost:5000/makanan");
-      return await response.json();
-    } catch (error) {
-      console.log(error);
-    }
+  const Produk = () => {
+    const { users } = GetData("http://localhost:5000/makanan");
+    console.log(users);
+    return users;
   };
+  const dataProduk = Produk();
 
   return (
     <table>
@@ -24,7 +23,7 @@ const TableProduk = () => {
         </tr>
       </thead>
       <tbody>
-        {dataProduksi?.data?.map((item, i) => (
+        {dataProduk?.data?.map((item, i) => (
           <tr key={i}>
             <td>{item.namaMakanan ?? "-"}</td>
             <td>{item.jumlahMakanan ?? "-"}</td>
@@ -34,7 +33,7 @@ const TableProduk = () => {
               {item.status <= item.minimum ? (
                 <StatusBar status="danger" title="Minimum" />
               ) : (
-                <StatusBar status="done" title="Tercukupi" /> ?? "-"
+                <StatusBar status="success" title="Tercukupi" /> ?? "-"
               )}
             </td>
             <td>??</td>

@@ -1,11 +1,12 @@
-import React from "react";
+import * as React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { logo } from "../assets/img";
 import axios from "axios";
 
 const Login = () => {
-  // handle submit
+  const [status, setStatus] = React.useState();
   const navigate = useNavigate();
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -21,9 +22,13 @@ const Login = () => {
       .then((res) => {
         console.log({ data });
         console.log(res);
-        setTimeout(() => navigate("/login"), 3000);
+        setStatus('success')
+        setTimeout(() => navigate("/login"), 2000);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err)
+        setStatus('error')
+      });
   };
 
   return (
@@ -61,6 +66,17 @@ const Login = () => {
             <h2 className="text-2xl">Daftar</h2>
             <form onSubmit={handleSubmit} className="flex flex-col gap-4 mt-5">
               <div className="px-5 py-8 space-y-4 bg-primary rounded-lg">
+                <div className="flex flex-col">
+                  <label htmlFor="username">Username</label>
+                  <input
+                    type="text"
+                    name="username"
+                    id="username"
+                    placeholder="Masukkan username"
+                    className="form-input"
+                    required
+                  />
+                </div>
                 <div className="flex flex-col">
                   <label htmlFor="email">Email</label>
                   <input
@@ -104,6 +120,13 @@ const Login = () => {
                     kebijakan privasi dari Lotus Crunchy
                   </p>
                 </div>
+              </div>
+              <div className="">
+                {status === 'success' ? (
+                  <span>Pendaftaran berhasil!</span>
+                ) : status === 'error' ? (
+                  <span>Pendaftaran gagal!</span>
+                ) : null}
               </div>
               <button type="submit" className="btn btn-primary">
                 Daftar

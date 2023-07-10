@@ -21,11 +21,11 @@ const PesananCustomer = () => {
 
     const pesanan = {
       tanggalPesanan: currentDatetime(),
-      pesanan: [
+      produk: [
         ["Lotus Chicken Original", chicken],
         ["Lotus Beef Original", beef],
       ],
-      totalBelanja: totalPrice,
+      total: totalPrice,
       pembayaran: e.target.pembayaran.value,
       status: "Pesanan Baru",
     };

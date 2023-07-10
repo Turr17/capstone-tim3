@@ -13,8 +13,12 @@ const SideBar = ({ activeUser, handleLogin, handleUser }) => {
     supplier: [
       ["Dashboard", "/"],
       ["Pesanan", "/pesanan"],
+      ["Persediaan", "/persediaan"],
     ],
-    customer: [["Dashboard", "/"]],
+    customer: [
+      ["Dashboard", "/"],
+      ["Pesanan", "/pesanan"],
+    ],
   };
 
   // handel logout
@@ -50,6 +54,8 @@ const SideBar = ({ activeUser, handleLogin, handleUser }) => {
                   case "Pesanan":
                     return <Board />;
                   case "Produksi":
+                    return <Store />;
+                  case "Persediaan":
                     return <Store />;
                   case "Bahan Baku":
                     return <Box />;
