@@ -13,14 +13,14 @@ import { SideBar, Profile, Notifikasi } from "./components";
 
 const App = () => {
   // login state
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState(false);
   const handleLogin = () => setIsLogin(!isLogin);
 
   // activeUser state
   const [activeUser, setActiveUser] = useState({
     id: "",
-    name: "patur",
-    role: "customer",
+    name: "",
+    role: "",
   });
   const handleUser = (id, name, role) =>
     setActiveUser({
