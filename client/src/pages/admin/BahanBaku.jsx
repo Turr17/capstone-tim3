@@ -1,16 +1,15 @@
 import React from "react";
 import { formatRupiah } from "../../components/format";
 import { StatusBar } from "../../components";
+import { GetData } from "../../components/api";
 
 const TableBahanBaku = () => {
-  const dataBahanBaku = async () => {
-    try {
-      const response = await fetch("http://localhost:5000/bahan");
-      return await response.json();
-    } catch (error) {
-      console.log(error);
-    }
+  const Bahan = () => {
+    const { users } = GetData("http://localhost:5000/bahan");
+    console.log(users);
+    return users;
   };
+  const dataBahanBaku = Bahan();
 
   return (
     <table>

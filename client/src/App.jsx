@@ -7,8 +7,8 @@ import {
   BahanBaku,
   Produksi,
 } from "./pages/admin";
-import { DashboardSupplier, PesananSupplier } from "./pages/supplier";
-import { PesananCustomer } from "./pages/customer";
+import { DashboardSupplier, PesananSupplier, PersediaanSupplier } from "./pages/supplier";
+import { PesananCustomer, RiwayatPesanan } from "./pages/customer";
 import { SideBar, Profile, Notifikasi } from "./components";
 
 const App = () => {
@@ -74,10 +74,12 @@ const App = () => {
               <Routes>
                 <Route path="/" element={<DashboardSupplier />} />
                 <Route path="/pesanan" element={<PesananSupplier />} />
+                <Route path="/persediaan" element={<PersediaanSupplier />} />
               </Routes>
             ) : (
               <Routes>
                 <Route path="/" element={<PesananCustomer />} />
+                <Route path="/pesanan" element={<RiwayatPesanan />} />
               </Routes>
             )}
           </main>

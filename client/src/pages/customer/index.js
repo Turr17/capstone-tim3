@@ -1,7 +1,7 @@
-import DashboardCustomer from "./DashboardCustomer";
+import RiwayatPesanan from "./RiwayatPesanan";
 import PesananCustomer from "./PesananCustomer";
 
 export {
-  DashboardCustomer,
+  RiwayatPesanan,
   PesananCustomer,
 }

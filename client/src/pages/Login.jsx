@@ -1,20 +1,19 @@
 import * as React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { logo } from "../assets/img";
+import { GetData } from "../components/api";
 
 const Login = ({ handleLogin, handleUser }) => {
   const navigate = useNavigate();
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState(false);
 
-  const dataUser = async () => {
-    try {
-      const response = await fetch("http://localhost:5000/user");
-      return await response.json();
-    } catch (error) {
-      console.log(error);
-    }
+  const User = () => {
+    const { users } = GetData("http://localhost:5000/user");
+    console.log(users);
+    return users;
   };
+  const dataUser = User();
 
   const handleSubmit = (event) => {
     event.preventDefault();

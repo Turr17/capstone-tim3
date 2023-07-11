@@ -1,16 +1,15 @@
 import React from "react";
 import { formatRupiah } from "../../components/format";
 import { ScoreCard } from "../../components";
+import { GetData } from "../../components/api";
 
 const TableRiwayat = () => {
-  const dataPesanan = async () => {
-    try {
-      const response = await fetch("http://localhost:5000/pesanan");
-      return await response.json();
-    } catch (error) {
-      console.log(error);
-    }
-  }
+  const Pesanan = () => {
+    const { users } = GetData("http://localhost:5000/pesanan");
+    console.log(users);
+    return users;
+  };
+  const dataPesanan = Pesanan();
   
   return (
     <table className="w-full flex-auto">

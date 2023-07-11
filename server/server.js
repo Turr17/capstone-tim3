@@ -25,6 +25,7 @@ const makanan = require("./routes/makanan");
 const bahan = require("./routes/bahan");
 const beli = require("./routes/beli");
 const pesanan = require("./routes/pesanan");
+const user = require("./routes/user");
 
 // use routes
-app.use([admin, supplier, customer, makanan, bahan, beli, pesanan]);
+app.use([admin, supplier, customer, makanan, bahan, beli, pesanan, user]);

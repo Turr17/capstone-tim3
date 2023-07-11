@@ -1,11 +1,12 @@
-import React from "react";
+import * as React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { logo } from "../assets/img";
 import axios from "axios";
 
 const Login = () => {
-  // handle submit
+  const [status, setStatus] = React.useState();
   const navigate = useNavigate();
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -20,10 +21,14 @@ const Login = () => {
       .post("http://localhost:5000/user/add", data)
       .then((res) => {
         console.log(res);
-        // e.target.reset()
-        setTimeout(() => navigate("/login"), 3000);
+        setStatus("success");
+        setTimeout(() => navigate("/login"), 2000);
+        e.target.reset();
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        setStatus("error");
+      });
   };
 
   return (
@@ -115,6 +120,13 @@ const Login = () => {
                     kebijakan privasi dari Lotus Crunchy
                   </p>
                 </div>
+              </div>
+              <div className="">
+                {status === "success" ? (
+                  <span>Pendaftaran berhasil!</span>
+                ) : status === "error" ? (
+                  <span>Pendaftaran gagal!</span>
+                ) : null}
               </div>
               <button type="submit" className="btn btn-primary">
                 Daftar
