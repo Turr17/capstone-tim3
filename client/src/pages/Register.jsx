@@ -20,14 +20,14 @@ const Login = () => {
     axios
       .post("http://localhost:5000/user/add", data)
       .then((res) => {
-        console.log({ data });
         console.log(res);
-        setStatus('success')
+        setStatus("success");
         setTimeout(() => navigate("/login"), 2000);
+        e.target.reset();
       })
       .catch((err) => {
-        console.log(err)
-        setStatus('error')
+        console.log(err);
+        setStatus("error");
       });
   };
 
@@ -122,9 +122,9 @@ const Login = () => {
                 </div>
               </div>
               <div className="">
-                {status === 'success' ? (
+                {status === "success" ? (
                   <span>Pendaftaran berhasil!</span>
-                ) : status === 'error' ? (
+                ) : status === "error" ? (
                   <span>Pendaftaran gagal!</span>
                 ) : null}
               </div>
