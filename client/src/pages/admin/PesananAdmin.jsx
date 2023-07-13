@@ -35,9 +35,6 @@ const TablePesanan = () => {
               )}
             </td>
             <td>{item.pesanan ?? '-'}</td>
-            {/* <td>
-              {item.pesanan.reduce((a, b) => a.concat(b))}
-            </td> */}
             <td>{formatRupiah(item.totalBelanja) ?? "-"}</td>
             <td>{item.pembayaran ?? "-"}</td>
             <td>??</td>

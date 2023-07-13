@@ -6,6 +6,7 @@ import {
   PesananAdmin,
   BahanBaku,
   Produksi,
+  UpdateBahan,
 } from "./pages/admin";
 import { DashboardSupplier, PesananSupplier, PersediaanSupplier } from "./pages/supplier";
 import { PesananCustomer, RiwayatPesanan } from "./pages/customer";
@@ -69,6 +70,7 @@ const App = () => {
                 <Route path="/pesanan" element={<PesananAdmin />} />
                 <Route path="/bahan" element={<BahanBaku />} />
                 <Route path="/produksi" element={<Produksi />} />
+                <Route path="/bahan/update/:id" element={<UpdateBahan />} />
               </Routes>
             ) : activeUser.role === "supplier" ? (
               <Routes>

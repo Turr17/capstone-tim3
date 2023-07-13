@@ -16,16 +16,15 @@ const TableRiwayat = () => {
       <thead>
         <tr>
           <th>Bahan Baku</th>
-          <th>Status</th>
           <th>Jumlah</th>
-          <th>Harga</th>
-          <th>Total</th>
+          <th>Status</th>
         </tr>
       </thead>
       <tbody>
         {dataBahan?.data?.map((item, i) => (
           <tr key={i}>
             <td>{item.namaBahan ?? "-"}</td>
+            <td>{item.jumlahBahan ?? 0}</td>
             <td>
               {(item.status <= item.minimum ? (
                 <StatusBar status="danger" title="Minimum" />
@@ -33,9 +32,6 @@ const TableRiwayat = () => {
                 <StatusBar status="success" title="Tercukupi" />
               )) ?? "-"}
             </td>
-            <td>{item.jumlahBahan ?? 0}</td>
-            <td>{formatRupiah(item.hargaBahan) ?? 0}</td>
-            {/* <td>{formatRupiah(item.total) ?? 0}</td> */}
           </tr>
         )) ?? <tr>Bahan Baku Tidak Tersedia</tr>}
       </tbody>

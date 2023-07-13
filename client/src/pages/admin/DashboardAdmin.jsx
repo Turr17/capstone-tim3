@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/iframe-has-title */
 import React from "react";
 import { formatRupiah } from "../../components/format";
 import { ScoreCard } from "../../components";
@@ -37,27 +38,14 @@ const TableRiwayat = () => {
 
 const DashboardAdmin = () => {
   return (
-    <div className="min-h-[calc(100vh-110px)] grid grid-cols-3 gap-y-4 gap-x-8 pb-5">
-      {/* grafik */}
-      <div className="col-span-2 flex flex-col gap-2 h-[300px]">
-        <h2 className="flex-none">Penjualan Produk 6 Bulan Terakhir</h2>
-        <div className="w-full flex-auto bg-gray-300 rounded-lg"></div>
-      </div>
-      {/* score card */}
-      <div className="col-start-3 col-span-1 row-span-2 space-y-4 pt-9">
-        <ScoreCard title="5000" desc="Produk Terjual" />
-        <ScoreCard title="250" desc="Total Ulasan" />
-        <ScoreCard title="20" desc="Stok Frozen Food" />
-        <ScoreCard title="10" desc="Pesanan Tersedia" />
-      </div>
-      {/* riwayat pesanan */}
-      <div className="col-span-2 col-start-1 flex flex-col gap-3">
-        <div>
-          <h2>Riwayat Pesanan</h2>
-          <p>Riwayat Pesanan Lotus Crunchy</p>
-        </div>
-        <TableRiwayat />
-      </div>
+    <div className="h-screen w-full flex pb-5">
+      <iframe
+        width="90%"
+        height="3400"
+        src="https://lookerstudio.google.com/embed/reporting/fa1b9f82-2937-43a6-a4db-508934299907/page/hJWWD"
+        frameborder="0"
+        className="mx-auto"
+      />
     </div>
   );
 };
