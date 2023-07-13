@@ -26,7 +26,7 @@ const TablePesanan = () => {
       <tbody>
         {dataPesanan?.data?.map((item, i) => (
           <tr key={i}>
-            <td>{item._id ?? "-"}</td>
+            <td>{item._id.substring(3,9) ?? "-"}</td>
             <td>
               {item.status === "Selesai" ? (
                 <StatusBar status="success" title="Pesanan Selesai" />

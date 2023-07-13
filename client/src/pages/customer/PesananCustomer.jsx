@@ -9,7 +9,7 @@ const PesananCustomer = () => {
   const [beef, setBeef] = useState(0);
   const priceChicken = 38000 * chicken;
   const priceBeef = 42000 * beef;
-  const totalPrice = priceChicken + priceBeef;
+  let totalPrice = priceChicken + priceBeef;
 
   useEffect(() => {
     console.log({ chicken, beef });
@@ -21,11 +21,12 @@ const PesananCustomer = () => {
 
     const pesanan = {
       tanggalPesanan: currentDatetime(),
-      produk: [
+      pesanan: [
         ["Lotus Chicken Original", chicken],
         ["Lotus Beef Original", beef],
       ],
-      total: totalPrice,
+      jumlahPesanan: chicken + beef,
+      totalBelanja: totalPrice,
       pembayaran: e.target.pembayaran.value,
       status: "Pesanan Baru",
     };
@@ -33,10 +34,17 @@ const PesananCustomer = () => {
     axios
       .post("http://localhost:5000/pesanan/add", pesanan)
       .then((res) => {
-        console.log({ pesanan });
         console.log(res);
+        alert('Pesanan berhasil dibuat')
+        setChicken(0)
+        setBeef(0)
+        totalPrice = 0
+        e.target.reset()
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err)
+        alert('Pesanan gagal dibuat')
+      });
   };
 
   return (

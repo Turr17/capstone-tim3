@@ -50,6 +50,7 @@ recordRoutes.route("/supplier/add").post(function (req, res) {
     username: req.body.username,
     email: req.body.email,
     password: req.body.password,
+    bahan: req.body.bahan,
   };
   db_connect
     .collection("supplier")
@@ -75,6 +76,7 @@ recordRoutes.route("/supplier/update/:id").put(function (req, res) {
       username: req.body.username,
       email: req.body.email,
       password: req.body.password,
+      bahan: req.body.bahan,
     },
   };
   db_connect

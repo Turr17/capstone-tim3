@@ -50,7 +50,7 @@ recordRoutes.route("/pesanan/add").post(function (req, res) {
     tanggalPesanan: req.body.tanggalPesanan,
     pesanan: req.body.pesanan,
     jumlahPesanan: req.body.jumlahPesanan,
-    totalBelanj: req.body.totalBelanj,
+    totalBelanja: req.body.totalBelanja,
     pembayaran: req.body.pembayaran,
     status: req.body.status,
   };
@@ -78,7 +78,7 @@ recordRoutes.route("/pesanan/update/:id").put(function (req, res) {
       tanggalPesanan: req.body.tanggalPesanan,
       pesanan: req.body.pesanan,
       jumlahPesanan: req.body.jumlahPesanan,
-      totalBelanj: req.body.totalBelanj,
+      totalBelanja: req.body.totalBelanja,
       pembayaran: req.body.pembayaran,
       status: req.body.status,
     },

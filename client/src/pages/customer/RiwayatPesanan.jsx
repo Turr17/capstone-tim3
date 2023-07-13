@@ -1,15 +1,14 @@
-import React from 'react'
-import { formatRupiah } from '../../components/format'
+import React from "react";
+import { formatRupiah } from "../../components/format";
+import { GetData } from "../../components/api";
 
 const TablePesanan = () => {
-  const dataPesanan = async () => {
-    try {
-      const response = await fetch("http://localhost:5000/pesanan");
-      return await response.json();
-    } catch (error) {
-      console.log(error);
-    }
+  const Pesanan = () => {
+    const { users } = GetData("http://localhost:5000/pesanan");
+    console.log(users);
+    return users;
   };
+  const dataPesanan = Pesanan();
 
   return (
     <table>
@@ -26,11 +25,18 @@ const TablePesanan = () => {
       <tbody>
         {dataPesanan?.data?.map((item, i) => (
           <tr key={i}>
-            <td>{item._id ?? "-"}</td>
-            <td>{item.tanggal ?? '-'}</td>
-            <td>{item.produk ?? "-"}</td>
-            <td>{item.jumlah ?? 0}</td>
-            <td>{formatRupiah(item.total) ?? 0}</td>
+            <td>{item._id.substring(3, 9) ?? "-"}</td>
+            <td>{item.tanggalPesanan ?? "-"}</td>
+            <td>
+              {item.pesanan?.map((el) => (
+                <>
+                  <p>{el[0]}</p>
+                  <p>{el[1]}</p>
+                </>
+              )) ?? "-"}
+            </td>
+            <td>{item.jumlahPesanan ?? 0}</td>
+            <td>{formatRupiah(item.totalBelanja) ?? 0}</td>
             <td>{item.pembayaran ?? "-"}</td>
             <td>??</td>
           </tr>
@@ -50,6 +56,6 @@ const RiwayatPesanan = () => {
       <TablePesanan />
     </>
   );
-}
+};
 
-export default RiwayatPesanan
+export default RiwayatPesanan;

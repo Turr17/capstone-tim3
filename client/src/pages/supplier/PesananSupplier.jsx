@@ -1,15 +1,14 @@
 import React from "react";
 import { formatRupiah } from "../../components/format";
+import { GetData } from "../../components/api";
 
 const TablePesanBahan = () => {
-  const dataBahan = async () => {
-    try {
-      const response = await fetch("http://localhost:5000/bahan");
-      return await response.json();
-    } catch (error) {
-      console.log(error);
-    }
+  const Bahan = () => {
+    const { users } = GetData("http://localhost:5000/bahan");
+    console.log(users);
+    return users;
   };
+  const dataBahan = Bahan();
 
   return (
     <table>
@@ -18,8 +17,6 @@ const TablePesanBahan = () => {
           <th>Bahan Baku</th>
           <th>Status</th>
           <th>Jumlah Pesanan</th>
-          <th>Harga</th>
-          <th>Total</th>
           <th>Aksi</th>
         </tr>
       </thead>
@@ -29,12 +26,6 @@ const TablePesanBahan = () => {
             <td>{item.namaBahan ?? "-"}</td>
             <td>{item.status ?? "-"}</td>
             <td>{item.jumlahBahan ?? 0}</td>
-            <td>{formatRupiah(item.hargaBahan) ?? "-"}</td>
-            <td>
-              {formatRupiah(
-                parseInt(item.jumlahBahan) * parseInt(item.hargaBahan)
-              ) ?? 0}
-            </td>
             <td>??</td>
           </tr>
         )) ?? <tr>Pesanan Bahan Baku Tidak Tersedia</tr>}

@@ -10,6 +10,7 @@ const TableBahanBaku = () => {
     return users;
   };
   const dataBahanBaku = Bahan();
+  console.log({ dataBahanBaku })
 
   return (
     <table>
@@ -19,7 +20,6 @@ const TableBahanBaku = () => {
           <th>Status</th>
           <th>Jumlah</th>
           <th>Minimum</th>
-          <th>Harga</th>
           <th>Aksi</th>
         </tr>
       </thead>
@@ -28,15 +28,18 @@ const TableBahanBaku = () => {
           <tr key={i}>
             <td>{item.namaBahan ?? "-"}</td>
             <td>
-              {(item.status <= item.minimum ? (
+              {(item.jumlahBahan <= item.minimum ? (
                 <StatusBar status="danger" title="Minimum" />
               ) : (
                 <StatusBar status="done" title="Tercukupi" />
               )) ?? "-"}
             </td>
-            <td>{item.jumlahBahan ?? 0}</td>
-            <td>{item.minimum ?? "-"}</td>
-            <td>{formatRupiah(item.hargaBahan) ?? 0}</td>
+            <td>
+              {item.jumlahBahan ?? 0} {item.satuanBahan ?? null}
+            </td>
+            <td>
+              {item.minimum ?? "-"} {item.satuanBahan ?? null}
+            </td>
             <td>??</td>
           </tr>
         )) ?? <tr>Bahan Baku Tidak Tersedia</tr>}

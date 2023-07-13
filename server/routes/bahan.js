@@ -9,7 +9,7 @@ recordRoutes.use(express.urlencoded({ extended: true }));
 recordRoutes.route("/bahan").get(function (req, res) {
   let db_connect = dbo.getDb("capstone");
   db_connect
-    .collection("bahanbaku")
+    .collection("bahan")
     .find({})
     .toArray(function (err, result) {
       if (err) throw err;
@@ -29,7 +29,7 @@ recordRoutes.route("/bahan/:id").get(function (req, res) {
   let db_connect = dbo.getDb("capstone");
   let myquery = { _id: new ObjectId(req.params.id) };
   db_connect
-    .collection("bahanbaku")
+    .collection("bahan")
     .findOne(myquery, function (err, result) {
       if (err) throw err;
       res.json(result);
@@ -49,13 +49,12 @@ recordRoutes.route("/bahan/add").post(function (req, res) {
   let myObj = {
     namaBahan: req.body.namaBahan,
     jumlahBahan: req.body.jumlahBahan,
-    hargaBahan: req.body.hargaBahan,
     supplier: req.body.supplier,
     status: req.body.status,
     minimum: req.body.minimum,
   };
   db_connect
-    .collection("bahanbaku")
+    .collection("bahan")
     .insertOne(myObj, function (err, result) {
       if (err) throw err;
       res.json(result);
@@ -77,14 +76,13 @@ recordRoutes.route("/bahan/update/:id").put(function (req, res) {
     $set: {
       namaBahan: req.body.namaBahan,
       jumlahBahan: req.body.jumlahBahan,
-      hargaBahan: req.body.hargaBahan,
       supplier: req.body.supplier,
       status: req.body.status,
       minimum: req.body.minimum,
     },
   };
   db_connect
-    .collection("bahanbaku")
+    .collection("bahan")
     .updateOne(myquery, newValues, function (err, result) {
       if (err) throw err;
       console.log("berhasil update material");
@@ -104,7 +102,7 @@ recordRoutes.route("/bahan/delete/:id").delete(function (req, res) {
   let db_connect = dbo.getDb("capstone");
   let myquery = { _id: new ObjectId(req.params.id) };
   db_connect
-    .collection("bahanbaku")
+    .collection("bahan")
     .deleteOne(myquery, function (err, result) {
       if (err) throw err;
       console.log("material berhasil dihapus");

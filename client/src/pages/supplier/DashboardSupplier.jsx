@@ -47,7 +47,7 @@ const DashboardSupplier = () => {
   return (
     <div className="min-h-[calc(100vh-110px)] grid grid-cols-3 gap-y-4 gap-x-8 pb-5">
       {/* grafik */}
-      <div className="col-span-2 flex flex-col gap-2">
+      <div className="col-span-2 flex flex-col gap-2 h-[300px]">
         <h2 className="flex-none">Permintaan Bahan Baku Sebulan Terakhir</h2>
         <div className="w-full flex-auto bg-gray-300 rounded-lg"></div>
       </div>
@@ -61,7 +61,7 @@ const DashboardSupplier = () => {
         <ScoreCard title="23 kg" desc="Stok Wortel" />
       </div>
       {/* riwayat pesanan */}
-      <div className="col-span-2 col-start-1 flex flex-col gap-3">
+      <div className="col-span-2 col-start-1 flex flex-col gap-3 h-[400px] overflow-y-scroll">
         <div>
           <h2>Inventory Lotus Crunchy</h2>
           <p>Informasi Stok Bahan Baku Lotus Crunchy</p>
